@@ -1,5 +1,10 @@
 body {
   margin: 0px;
+  background-color: #5f5f5f;
+}
+
+#body {
+  margin: 0px;
   width: 100vw;
   height: 100vh;
   display: grid;
@@ -10,10 +15,9 @@ body {
   grid-template-areas:
     "main"
     "footer";
-  background-color: #5f5f5f;
 }
 
-body>main {
+#body>main {
   font-size: 15px;
   grid-area: main;
   aspect-ratio: 1/1;
@@ -25,7 +29,8 @@ body>main {
 }
 
 section#game {
-  min-width: 75vw;
+  min-width: 300px;
+  min-height: 300px;
   aspect-ratio: 1/1;
   display: grid;
   align-items: center;
@@ -128,7 +133,7 @@ section#game {
 }
 
 
-body>footer {
+#body>footer {
   grid-area: footer;
   width: 100%;
   height: 2.5em;
@@ -139,7 +144,7 @@ body>footer {
   color: #bbb;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
-body>footer a {
+#body>footer a {
   color: #bbb;
   text-decoration: none;
 }
@@ -162,6 +167,7 @@ section#controllers {
 
 #display {
   width: 50px;
+  cursor: pointer;
   text-align: center;
   margin: 10px 6px 6px 6px;
   padding: 3px 8px;
@@ -277,7 +283,7 @@ section#controllers {
 }
 
 .tristate>input[type=radio]:first-child {
-  z-index: 10;
+  z-index: 1;
 }
 
 .tristate>input[type=radio]:first-child:checked {
@@ -285,7 +291,7 @@ section#controllers {
 }
 
 .tristate>input[type=radio]:checked+input[type=radio] {
-  z-index: 10;
+  z-index: 1;
 }
 
 .tristate>input[type=radio]:checked+i+label,
@@ -314,7 +320,7 @@ section#controllers {
   width: 40px;
   height: 16px;
   margin-top: 2px;
-  background-color: #bdbdbd;
+  background-color: #ffe887;
   border-radius: 8px;
 }
 
@@ -326,18 +332,18 @@ section#controllers {
   display: block;
   width: 24px;
   height: 24px;
-  background-color: #fafafa;
+  background-color: #ffcf00;
   border-radius: 50%;
   box-shadow: 0 1px 8px 1px rgba(0, 0, 0, 0.3);
 }
 
 .tristate-switcher>input[type=radio]:checked+i {
-  background-color: #a5d7a7;
+  background-color: #f9a19a;
 }
 
 .tristate-switcher>input[type=radio]:checked+i:before {
   left: 19px;
-  background-color: #4caf50;
+  background-color: #f44336;
 }
 
 .tristate-switcher>input[type=radio]:checked+input[type=radio]+i:before {
@@ -345,11 +351,11 @@ section#controllers {
 }
 
 .tristate-switcher>input[type=radio]:checked+input[type=radio]+input[type=radio]+i {
-  background-color: #f9a19a;
+  background-color: #a5d7a7;
 }
 
 .tristate-switcher>input[type=radio]:checked+input[type=radio]+input[type=radio]+i:before {
-  background-color: #f44336;
+  background-color: #4caf50;
 }
 /**** end tristate ****/
 
@@ -462,4 +468,111 @@ section#controllers {
 }
 
 /**** end start-button ****/
+
+
+/* Modal (background) */
+.modal {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  z-index: 10;
+  background-color: black;
+  background-color: #00000099;
+  opacity: 0;
+  transition: opacity 0.5s;
+  -webkit-transition: opacity 0.5s;
+}
+
+.modal a {
+  text-decoration: underline;
+}
+
+.modal.active {
+  opacity: 1;
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  z-index: 10;
+  background-color: #000000bd;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #222;
+  border-radius: 5px;
+  max-width: 80vw;
+  min-width: 200px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  opacity: 1;
+  transition: opacity 0.5s, top 0.5s ease-in-out, left 0.5s ease-in-out;
+  -webkit-transition: opacity 0.5s, top 0.5s ease-in-out, left 0.5s ease-in-out;
+  font-size: 1.1em;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.modal-content input {
+  width: -webkit-fill-available;
+  margin: 10px 0;
+  padding: 4px;
+  font-size: 1.2em;
+}
+
+/* Add Animation */
+@-webkit-keyframes animate_opacity {
+  from {
+      opacity: 0;
+  }
+
+  to {
+      opacity: 1;
+  }
+}
+
+@keyframes animate_opacity {
+  from {
+      opacity: 0;
+  }
+
+  to {
+      opacity: 1;
+  }
+}
+
+/* The Close Button */
+.modal-close {
+  text-decoration: none;
+  color: #999;
+  float: right;
+  font-size: 25px;
+}
+
+.modal-close:hover,
+.modal-close:focus {
+  color: #eee;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: #00000080;
+  color: white;
+}
+
+.modal-header h2 {
+  margin: 5px;
+  font-size: 1.2em;
+  color: #999;
+  text-align: center;
+  font-weight: 500;
+}
+
+.modal-body {
+  padding: 2px 16px;
+  overflow: auto;
+  font-size: 0.9em;
+  color: #aaa;
+  padding: 20px;
+}
 

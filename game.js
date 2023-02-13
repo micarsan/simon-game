@@ -7,8 +7,13 @@ var buttons = ['red','green','yellow','blue']; //buttons order
 
 
 window.addEventListener('load', loaded);
+window.addEventListener('resize', on_resize);
+
 
 function loaded() {
+
+    // Set size
+    on_resize();
 
     // Start button
     document.querySelector('#start-button').addEventListener('click', function(){
@@ -29,6 +34,10 @@ function loaded() {
         });
     });
 
+    // Init storage
+    init_storage();
+
+
 }
 
 /**
@@ -42,7 +51,7 @@ function start_game() {
     let selector = document.querySelectorAll('input[name=level]');
     selector.forEach( function(element) {
         if( element.checked ) {
-            level = 1200 / element.value; // Set level
+            level = 900 / element.value; // Set level
             console.log('Level selected: ' + element.value);
         }
     });
@@ -84,6 +93,9 @@ function end_game() {
 
     user_secuence = 0;
     sequence = [];
+
+    // Launch modal for storage score
+    show_modal('insert_score');
 
 }
 
@@ -192,8 +204,136 @@ function user_input() {
 
 }
 
+/**
+ * Play a sound (id is key of buttons array)
+ */
 function play_sound(id) {
 
     let sound = new Audio('sounds/'+ id +'.mp3').play();
 
 }
+
+/**
+ * Events on size change
+ */
+function on_resize() {
+
+    let window_width = window.innerWidth;
+    let window_height = window.innerHeight;
+
+    if( window_width > window_height ) {
+        // Set size to height
+        document.getElementById('game').style.width = (window_height*0.8) + 'px';
+        document.getElementById('game').style.height = (window_height*0.8) + 'px';
+    } else {
+        // Set size to width
+        document.getElementById('game').style.width = (window_width*0.8) + 'px';
+        document.getElementById('game').style.height = (window_width*0.8) + 'px';
+    }
+}
+
+/**
+ * Modal
+ */
+
+// muestra el modal con la cabecera y cuerpo recibidos
+function show_modal(id) {
+
+    //mostramos y animamos
+    document.getElementById(id).style.display = 'flex';
+    setTimeout(() => {
+        document.getElementById(id).classList.add('active');
+    }, 50);
+}
+
+
+//cierra el modal (con su animación)
+function close_modal() {
+    document.querySelectorAll('.modal').forEach( function(element) {
+        element.classList.remove('active');
+        
+        setTimeout(() => {
+            element.style.display = 'none';
+        }, 600);
+    });
+}
+
+
+/**
+ * BDD
+ */
+
+var store = window.localStorage;
+var score_list = []
+var _tbody = document.querySelector("#score_table tbody");
+
+
+function init_storage() {
+  
+  if (store.getItem("score_list") == null) {
+    store.setItem("score_list", JSON.stringify(score_list));
+  }
+  score_list = JSON.parse( store.getItem("score_list") );
+
+  console.table(score_list);
+}
+
+function sort_score_list(){
+    let arr = score_list;
+    score_list = arr.sort((a,b) => {
+        if ( a.score < b.score ){
+          return 1;
+        }
+        if ( a.score > b.score ){
+          return -1;
+        }
+        return 0;
+      });
+}
+
+function show_score() {
+    show_modal('score_table');
+    _tbody.innerHTML="";
+    sort_score_list();
+
+    score_list.forEach(element => {
+        add_to_score_list(element);
+    });
+}
+
+function add_to_score_list(score){
+  let newElement = document.querySelector("#score_field").content.cloneNode(true);
+  newElement.querySelector(".score").innerText  = score.score;
+  newElement.querySelector(".name").innerText  = score.name;
+  newElement.querySelector(".date").innerText  = score.date;
+  _tbody.appendChild(newElement);
+}
+
+function save(data) {
+  const name = data.querySelector("[name=name]").value;
+  const score = parseInt(document.getElementById('display').innerHTML);
+  const score_field = {
+    score: score,
+    name: name, 
+    date: new Date()
+  }
+  score_list.push( score_field );
+
+  store.setItem("score_list", JSON.stringify(score_list));  
+  
+  document.querySelector('#insert_score').classList.remove('active');
+  setTimeout(() => {
+    document.querySelector('#insert_score').style.display = 'none';
+  }, 600);
+
+  show_score();
+  name.value="";
+  return false;
+}
+
+// when click on score, show score table
+document.getElementById('display').addEventListener('click', show_score);
+
+window.addEventListener('offline', (event) => {
+  console.log("The network connection has been lost.");
+});

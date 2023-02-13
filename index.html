@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="Cache-control" content="no-store">
-    <meta name="author" content="Miguel Carmona" />
+    <meta name="author" content="Miguel e Iván" />
     <meta name="description" content="simon - otro juego en html y js" />
     <meta name="keywords" content="simon, game, juego, html, js, javascript" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-    <title>simon by Miguel Carmona</title>
+    <title>simon by Miguel e Iván</title>
     <link rel="apple-touch-icon" sizes="57x57" href="apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="apple-icon-72x72.png">
@@ -30,34 +30,82 @@
 </head>
 
 <body>
-    <main>
-        <section id="game" class="">
-            <button id="red" value="0">&nbsp;</button>
-            <button id="green" value="1">&nbsp;</button>
-            <button id="yellow" value="2">&nbsp;</button>
-            <button id="blue" value="3">&nbsp;</button>
-        </section>
-        <section id="controllers" class="metal radial">
-            <div id="level-selector" class="tristate tristate-switcher">
-                <input type="radio" id="item2-state-off" name="level" value="1" checked>
-                <input type="radio" id="item2-state-null" name="level" value="2">
-                <input type="radio" id="item2-state-on" name="level" value="3">
-                <i></i>
-                <label for="item2-state-null">Nivel 1</label>
-                <label for="item2-state-on">Nivel 2</label>
-                <label for="item2-state-off">Nivel 3</label>
+    <div id="score_table" class="full_size modal" style="z-index: 10;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span onclick="close_modal()" class="modal-close">&times;</span>
+                <h2 id="modal-title">Puntuaciones</h2>
             </div>
-            <div id="start-button">
-                <button class="start-button-pushable" role="button">
-                    <span class="start-button-shadow"></span>
-                    <span class="start-button-edge"></span>
-                    <span class="start-button-front text">⏻</span>
-                </button>
+            <div class="modal-body">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Puntuación</th>
+                            <th>Nombre</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                    <template id="score_field">
+                        <tr>
+                            <td class="score"></td>
+                            <td class="name"></td>
+                            <td class="date"></td>
+                        </tr>
+                    </template>
+            </table>
             </div>
-            <div id="display">0</div>
-        </section>
-    </main>
-    <footer>simon by&nbsp; <a href="https://miguelcarmona.com"> Miguel Carmona</a></footer>
+        </div>
+    </div>
+    <div id="insert_score" class="full_size modal" style="z-index: 10;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span onclick="close_modal()" class="modal-close">&times;</span>
+                <h2 id="modal-title">Guardar puntuación</h2>
+            </div>
+            <div class="modal-body">
+                <p>Nueva puntuación: <span id="modal_score"></span></p>
+                <form onsubmit="return save(this);">
+                    <label for="name">Introduzca su nombre:</label>
+                    <input type="text" id="name" name="name" placeholder="su nombre">
+                    <input type="submit" value="Guardar">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="body">
+        <main>
+            <section id="game" class="">
+                <button id="red" value="0">&nbsp;</button>
+                <button id="green" value="1">&nbsp;</button>
+                <button id="yellow" value="2">&nbsp;</button>
+                <button id="blue" value="3">&nbsp;</button>
+            </section>
+            <section id="controllers" class="metal radial">
+                <div id="level-selector" class="tristate tristate-switcher">
+                    <input type="radio" id="item2-state-off" name="level" value="1" checked>
+                    <input type="radio" id="item2-state-null" name="level" value="2">
+                    <input type="radio" id="item2-state-on" name="level" value="3">
+                    <i></i>
+                    <label for="item2-state-null">Nivel 1</label>
+                    <label for="item2-state-on">Nivel 2</label>
+                    <label for="item2-state-off">Nivel 3</label>
+                </div>
+                <div id="start-button">
+                    <button class="start-button-pushable" role="button">
+                        <span class="start-button-shadow"></span>
+                        <span class="start-button-edge"></span>
+                        <span class="start-button-front text">⏻</span>
+                    </button>
+                </div>
+                <div id="display">0</div>
+            </section>
+        </main>
+        <footer>simon by&nbsp; <a href="https://miguelcarmona.com">Miguel</a> &nbsp;e Iván</footer>
+    </div>
 </body>
 <script src="game.js"></script>
+
 </html>
