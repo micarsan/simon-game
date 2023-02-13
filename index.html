@@ -33,13 +33,34 @@
     <header>Puntuación y otros</header>
     <main>
         <section id="game">
-            <div id="red">&nbsp;</div>
-            <div id="green">&nbsp;</div>
-            <div id="yellow">&nbsp;</div>
-            <div id="blue">&nbsp;</div>
+            <button id="red">&nbsp;</button>
+            <button id="green">&nbsp;</button>
+            <button id="yellow">&nbsp;</button>
+            <button id="blue">&nbsp;</button>
+        </section>
+        <section id="controllers" class="metal radial">
+            <div id="level-selector" class="tristate tristate-switcher">
+                <input type="radio" id="item2-state-off" name="level" value="1" checked>
+                <input type="radio" id="item2-state-null" name="level" value="2">
+                <input type="radio" id="item2-state-on" name="level" value="3">
+                <i></i>
+                <label for="item2-state-null">Nivel 1</label>
+                <label for="item2-state-on">Nivel 2</label>
+                <label for="item2-state-off">Nivel 3</label>
+            </div>
+            <div id="start-button">
+                <button class="start-button-pushable" role="button">
+                    <span class="start-button-shadow"></span>
+                    <span class="start-button-edge"></span>
+                    <span class="start-button-front text">⏻</span>
+                </button>
+            </div>
+            <div id="display">
+                123
+            </div>
         </section>
     </main>
     <footer>by Miguel Carmona</footer>
 </body>
-
+<script src="game.js"></script>
 </html>
