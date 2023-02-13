@@ -59,6 +59,13 @@ section#game {
   border-style: solid;
 }
 
+.user_input #red:hover,
+.user_input #green:hover,
+.user_input #yellow:hover,
+.user_input #blue:hover {
+  cursor: pointer;
+}
+
 #red {
   grid-area: red;
   background-color: rgb(210, 0, 0);
@@ -68,6 +75,12 @@ section#game {
   border-right: 0.5em solid #000;
   border-bottom: 0.5em solid #000;
   border-left: 1em solid rgba(255, 255, 255, 0.2);
+}
+#red.on {
+  background-color: rgb(255, 32, 32);
+}
+.user_input #red:active {
+  background-color: rgb(157, 25, 25);
 }
 
 #green {
@@ -80,6 +93,12 @@ section#game {
   border-bottom: 0.5em solid #000;
   border-left: 0.5em solid #000;
 }
+#green.on {
+  background-color: rgb(0, 164, 0);
+}
+.user_input #green:active {
+  background-color: rgb(13, 77, 13);
+}
 
 #yellow {
   grid-area: yellow;
@@ -91,6 +110,12 @@ section#game {
   border-bottom: 1em solid rgba(255, 255, 255, 0.2);
   border-left: 1em solid rgba(255, 255, 255, 0.2);
 }
+#yellow.on {
+  background-color: rgb(255, 255, 0);
+}
+.user_input #yellow:active {
+  background-color: rgb(134, 134, 11);
+}
 
 #blue {
   grid-area: blue;
@@ -101,6 +126,12 @@ section#game {
   border-right: 1em solid rgba(255, 255, 255, 0.2);
   border-bottom: 1em solid rgba(255, 255, 255, 0.2);
   border-left: 0.5em solid #000;
+}
+#blue.on {
+  background-color: rgb(39 42 254);
+}
+.user_input #blue:active {
+  background-color: rgb(0, 5, 149);
 }
 
 
@@ -204,12 +235,32 @@ section#controllers {
 
 
 /**** start tristate ****/
+
+#level-selector {
+  margin: 22px 8px 8px 8px;
+}
+
+/**** Display ****/
+#display {
+  margin: 12px 7px 7px 7px;
+  padding: 3px 8px;
+  border-radius: 7px;
+  border: 2px solid rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.2);
+  font-size: 1.4em;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #222;
+  text-shadow: 0px 0px 2px #CE0000;
+}
+
+
 .tristate {
   position: relative;
 }
 
 .tristate input[type=radio] {
   position: absolute;
+  cursor: pointer;
   left: 0;
   top: 0;
   width: 18px;
@@ -221,7 +272,7 @@ section#controllers {
 
 .tristate label {
   display: inline-block;
-  margin: 0 3px 7px 3px;
+  margin: 1px 3px 7px 3px;
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -314,8 +365,8 @@ section#controllers {
 .tristate-switcher>input[type=radio]:checked+input[type=radio]+input[type=radio]+i:before {
   background-color: #f44336;
 }
-
 /**** end tristate ****/
+
 
 /**** start start-button ****/
 .start-button-pushable {
@@ -432,9 +483,3 @@ section#controllers {
 
 /**** end start-button ****/
 
-/**** Display ****/
-#display {
-  margin: 7px;
-  font-size: 1.4em;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
