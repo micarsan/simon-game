@@ -109,6 +109,7 @@ function play_sequence(){
 
         setTimeout( () => {
             button_on( document.querySelector('#'+buttons[button_id]) );
+            play_sound(button_id);
         }, level*i);
     }
 
@@ -142,6 +143,9 @@ function button_pushed(element) {
         console.log('user_secuence: ' + user_secuence);
         console.log('sequence[user_secuence]: ' + sequence[user_secuence]);
         console.log('element.value: ' + element.value);
+
+        // play audio
+        play_sound(element.value);
         
         if( sequence[user_secuence] == element.value) { // ok
 
@@ -158,7 +162,7 @@ function button_pushed(element) {
 
                 setTimeout( () => {
                     add_sequence_and_play();
-                }, level/2);
+                }, level);
 
             } else {
                 user_secuence++;
@@ -185,5 +189,11 @@ function user_input() {
 
     document.getElementById('game').classList.add('user_input');
 
+
+}
+
+function play_sound(id) {
+
+    let sound = new Audio('sounds/'+ id +'.mp3').play();
 
 }
