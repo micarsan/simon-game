@@ -414,7 +414,9 @@ section#controllers {
 }
 
 .start-button-front {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
   aspect-ratio: 1/1;
   min-width: 2em;
