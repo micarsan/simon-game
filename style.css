@@ -498,7 +498,6 @@ section#controllers {
   z-index: 10;
   background-color: #000000bd;
   margin: auto;
-  padding: 20px;
   border: 1px solid #222;
   border-radius: 5px;
   max-width: 80vw;
@@ -576,3 +575,10 @@ section#controllers {
   padding: 20px;
 }
 
+.modal-body table {
+  border-spacing: 10px;
+}
+
+table td.score {
+  text-align: center;
+}

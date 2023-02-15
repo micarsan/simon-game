@@ -316,11 +316,12 @@ function add_to_score_list(score){
 function save(data) {
   const name = data.querySelector("[name=name]").value;
   const score = parseInt(document.getElementById('display').innerHTML);
+  const date_time = new Date();
   const score_field = {
     score: score,
     name: name, 
-    date: new Date()
-  }
+    date: ('0' + date_time.getDate()).slice(-2) + '/' + ('0' + (date_time.getMonth() + 1)).slice(-2) + '/' + date_time.getFullYear()
+  };
   score_list.push( score_field );
 
   store.setItem("score_list", JSON.stringify(score_list));  
