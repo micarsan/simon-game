@@ -59,7 +59,7 @@ function start_game() {
     // Clean last playing status
     document.getElementById('game').classList.remove('user_input');
     score = 0;
-    document.getElementById('display').innerHTML = score;
+    document.getElementById('display').innerHTML = 0;
     
 
     // Start
@@ -244,6 +244,10 @@ function show_modal(id) {
     setTimeout(() => {
         document.getElementById(id).classList.add('active');
     }, 50);
+
+    if( id == 'insert_score') {
+        document.getElementById('modal_score').innerHTML = document.getElementById('display').innerHTML;
+    }
 }
 
 
